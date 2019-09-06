@@ -19,7 +19,6 @@ public class CategoriaService {
 		Optional<Categoria> obj = catRepos.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotfoundException(
 					"Objeto não encontrado Id: " + id  +", Tipo: " + Categoria.class.getName()));
-		
-		
+
 	}
 }

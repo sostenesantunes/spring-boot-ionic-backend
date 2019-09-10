@@ -15,7 +15,7 @@ import com.sostenesantunes.cursomc.domain.Categoria;
 import com.sostenesantunes.cursomc.services.CategoriaService;
 
 @RestController
-@RequestMapping(value = "/categorias")
+@RequestMapping(value ="/categorias")
 public class CategoriaResource {
 	
 	@Autowired
@@ -39,6 +39,12 @@ public class CategoriaResource {
 	public ResponseEntity<Void> update(@RequestBody Categoria obj, @PathVariable Integer id) {
 		obj.setId(id);
 		obj = service.update(obj);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Void> delete(@PathVariable Integer id) {	
+		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 }

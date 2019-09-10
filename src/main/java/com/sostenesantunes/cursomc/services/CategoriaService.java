@@ -27,4 +27,9 @@ public class CategoriaService {
 		
 		return catRepos.save(obj);
 	}
+	
+	public Categoria update(Categoria obj) {
+		findById(obj.getId());
+		return catRepos.save(obj);
+	}
 }

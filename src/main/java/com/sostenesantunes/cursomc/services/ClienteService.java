@@ -18,8 +18,7 @@ public class ClienteService {
 	public Cliente findById(Integer id) {
 		Optional<Cliente> obj = catRepos.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotfoundException(
-					"Objeto não encontrado Id: " + id  +", Tipo: " + Cliente.class.getName()));
-		
+					"Objeto não encontrado Id: " + id  +", Tipo: " + Cliente.class.getName()));	
 		
 	}
 }

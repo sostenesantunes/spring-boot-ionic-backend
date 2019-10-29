@@ -21,4 +21,11 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
 			+ "INNER JOIN obj.categorias cat "
 			+ "WHERE obj.nome LIKE %:nome% AND cat IN :categorias")
 	Page<Produto> findDistinctByNomeContainingAndCategoriasIn(@Param("nome") String nome, @Param("categorias") List<Categoria> categorias, Pageable pageRequest);
+	
+	/* Method Simplificado do Spring
+	 * 
+	 * Page<Produto> findDistinctByNomeContainingAndCategoriasIn(String nome, List<Categoria> categorias, Pageable pageRequest);
+	 * 
+	 */ 
+
 }

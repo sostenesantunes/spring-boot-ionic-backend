@@ -12,6 +12,7 @@ import com.sostenesantunes.cursomc.domain.ItemPedido;
 import com.sostenesantunes.cursomc.domain.PagamentoComBoleto;
 import com.sostenesantunes.cursomc.domain.Pedido;
 import com.sostenesantunes.cursomc.domain.enums.EstadoPagamento;
+import com.sostenesantunes.cursomc.repositories.ClienteRepository;
 import com.sostenesantunes.cursomc.repositories.ItemPedidoRepository;
 import com.sostenesantunes.cursomc.repositories.PagamentoRepository;
 import com.sostenesantunes.cursomc.repositories.PedidoRepository;
@@ -36,6 +37,9 @@ public class PedidoService {
 	@Autowired
 	private ProdutoService produtoService;
 	
+	@Autowired
+	private ClienteService clienteService;
+	
 	public Pedido findById(Integer id) {
 		Optional<Pedido> obj = catRepos.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotfoundException(
@@ -46,6 +50,7 @@ public class PedidoService {
 	public Pedido insert(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		obj.setCliente(clienteService.findById(obj.getCliente().getId()));
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		
@@ -59,10 +64,12 @@ public class PedidoService {
 		
 		for (ItemPedido ip : obj.getItens()) {
 			ip.setDesconto(0.0);
-			ip.setPreco(produtoService.findById(ip.getProduto().getId()).getPreco());
+			ip.setProduto(produtoService.findById(ip.getProduto().getId()));
+			ip.setPreco(ip.getProduto().getPreco());
 			ip.setPedido(obj);
 		}
 		itemPedidoRepository.saveAll(obj.getItens());
+		System.out.println(obj);
 		return obj;
 	}
 }

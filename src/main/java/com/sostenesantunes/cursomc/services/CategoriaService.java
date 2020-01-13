@@ -54,7 +54,7 @@ public class CategoriaService {
 		return catRepos.findAll();
 	}
 	
-	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
+	public Page<Categoria> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
 		PageRequest pageRequest	 = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
 		return catRepos.findAll(pageRequest);
 	}

@@ -21,3 +21,4 @@ public interface EmailService {
 	
 	void sendNewPasswordEmail(Cliente cliente, String newPass);
 }
+	
